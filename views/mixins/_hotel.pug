@@ -45,3 +45,7 @@ mixin hotel(hotel, searchQuery)
         p= `Total per person $ ${costEach}`
         hr
         h3= `Total cost: $ ${totalCost}`
+
+        - const query = `id=${hotel._id}&duration=${searchQuery.duration}&dateOfDeparture=${searchQuery.dateOfDeparture}&numberOfGuests=${searchQuery.numberOfGuests}`;
+        if url === "/results"
+          a.button(href=`/confirmation/${query}`) Continue
