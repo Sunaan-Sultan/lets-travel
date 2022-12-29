@@ -59,7 +59,6 @@ html
         div(class=`message message_${keys}`)
           span= values 
           span.close_btn(onClick="this.parentNode.remove()") &times;
-          
-      //if url.startsWith(' ')
-      img(src="/images/beach.jpg")
+      if url === '/'    
+        img(src="/images/beach.jpg")
     block content

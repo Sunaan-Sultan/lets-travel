@@ -108,8 +108,8 @@ exports.orderPlaced = async (req, res, next) => {
       hotel_id: parsedData.id,
       order_details: {
         duration: parsedData.duration,
-        numberOfGuests: parsedData.numberOfGuests,
         dateOfDeparture: parsedData.dateOfDeparture,
+        numberOfGuests: parsedData.numberOfGuests,
       },
     });
     await order.save();
@@ -123,18 +123,41 @@ exports.orderPlaced = async (req, res, next) => {
 exports.myAccount = async (req, res, next) => {
   try {
     const orders = await Order.aggregate([
-      { $match: { user_id: req.user._id } },
+      { $match: { user_id: req.user.id } },
       {
         $lookup: {
-          from: "hotel",
+          from: "hotels",
           localField: "hotel_id",
           foreignField: "_id",
           as: "hotel_data",
         },
       },
     ]);
+
     res.render("user_account", {
       title: "My Account",
+      orders,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.allOrders = async (req, res, next) => {
+  try {
+    const orders = await Order.aggregate([
+      {
+        $lookup: {
+          from: "hotels",
+          localField: "hotel_id",
+          foreignField: "_id",
+          as: "hotel_data",
+        },
+      },
+    ]);
+
+    res.render("orders", {
+      title: "All Orders",
       orders,
     });
   } catch (error) {
