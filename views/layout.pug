@@ -16,7 +16,9 @@ html
             li
               a(href="/login")
                 button(type="button") Login
-          else        
+          else
+            li 
+              a(href="/my-account") My bookings / account        
             li
               a(href="/logout") logout (#{user.first_name})
 

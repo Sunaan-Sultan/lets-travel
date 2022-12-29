@@ -37,5 +37,8 @@ router.post("/sign-up", userController.signUpPost, userController.loginPost);
 router.get("/login", userController.loginGet);
 router.post("/login", userController.loginPost);
 router.get("/logout", userController.logout);
+router.get("/confirmation/:data", userController.bookingConfirmation);
+router.get("/order-placed/:data", userController.orderPlaced);
+router.get("/my-account", userController.myAccount);
 
 module.exports = router;
