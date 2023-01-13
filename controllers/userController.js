@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Hotel = require("../models/hotel");
 const Order = require("../models/order");
+const Wishlist = require("../models/wishlist");
 const Passport = require("passport");
 
 //Express validator
@@ -137,6 +138,45 @@ exports.myAccount = async (req, res, next) => {
     res.render("user_account", {
       title: "My Account",
       orders,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.wishListPlaced = async (req, res, next) => {
+  try {
+    const data = req.params.data;
+    const parsedData = querystring.parse(data);
+    const wishList = new Wishlist({
+      user_id: req.user._id,
+      hotel_id: parsedData.id,
+    });
+    await wishList.save();
+    req.flash("info", "Hotel Wishlisted successfully");
+    res.redirect("/wishlist");
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.wishList = async (req, res, next) => {
+  try {
+    const wishlists = await Wishlist.aggregate([
+      { $match: { user_id: req.user.id } },
+      {
+        $lookup: {
+          from: "hotels",
+          localField: "hotel_id",
+          foreignField: "_id",
+          as: "hotel_data",
+        },
+      },
+    ]);
+
+    res.render("wishlist", {
+      title: "Wishlist",
+      wishlists,
     });
   } catch (error) {
     next(error);

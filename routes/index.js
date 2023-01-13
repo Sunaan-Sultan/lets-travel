@@ -41,5 +41,7 @@ router.get("/logout", userController.logout);
 router.get("/confirmation/:data", userController.bookingConfirmation);
 router.get("/order-placed/:data", userController.orderPlaced);
 router.get("/my-account", userController.myAccount);
+router.get("/wishlist", userController.wishList);
+router.get("/wishlistPlaced/:data", userController.wishListPlaced);
 
 module.exports = router;

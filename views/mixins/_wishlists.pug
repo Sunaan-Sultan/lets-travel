@@ -1,0 +1,8 @@
+mixin wishlists(wishlist)
+
+    .bookings
+        ul 
+            //- li= `Order ref: ${order._id}`
+            each data in wishlist.hotel_data
+                li= `Hotel: ${data.hotel_name}`
+                li= `Country: ${data.country}`
