@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      nav
+        a(href="/")
+          img#logo(src="/images/logo.png")
+        ul
+          if !user
+            li
+              a(href="/sign-up") 
+                button(type="button") Sign up
+            li
+              a(href="/login")
+                button(type="button") Login
+          else
+            li 
+              a(href="/my-account") My bookings / account        
+            li
+              a(href="/logout") logout (#{user.first_name})
+
+      - const values = Object.values(flash)
+      - const keys = Object.keys(flash)
+      if keys.length > 0
+        div(class=`message message_${keys}`)
+          span= values 
+          span.close_btn(onClick="this.parentNode.remove()") &times;
+    block content

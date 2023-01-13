@@ -74,6 +74,8 @@ button {
 img {
   width: 100%;
   vertical-align: middle;
+  flex: 1;
+  margin: 1em;
 }
 
 /* CONTENT */
@@ -217,6 +219,7 @@ textarea {
   .hotel_img {
     flex: 1;
     margin: 1em;
+    display: inline-flex;
   }
 
   .hotel_info {
