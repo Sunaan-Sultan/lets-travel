@@ -1,4 +1,4 @@
-# lets-travel
+# Lets Travel
 A hotel booking travel application by which one can <br>
   • Book hotel, <br>
   • Search hotel, <br>
